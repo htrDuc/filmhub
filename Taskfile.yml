@@ -1,0 +1,57 @@
+version: '3'
+
+vars:
+  MVN: ./mvnw
+
+tasks:
+  default:
+    cmds:
+      - task --list
+    silent: true
+
+  build:
+    desc: Compile và đóng gói tất cả module, bỏ qua test
+    cmds:
+      - '{{.MVN}} package -DskipTests'
+
+  test:
+    desc: Chạy test tất cả module
+    cmds:
+      - '{{.MVN}} test'
+
+  verify:
+    desc: Build + test đầy đủ (giống CI)
+    cmds:
+      - '{{.MVN}} verify'
+
+  clean:
+    desc: Xoá target/ của tất cả module
+    cmds:
+      - '{{.MVN}} clean'
+
+  up:
+    desc: Bật hạ tầng local (Postgres...)
+    cmds:
+      - docker compose up -d --wait
+
+  down:
+    desc: Tắt hạ tầng local, giữ dữ liệu
+    cmds:
+      - docker compose down
+
+  reset:
+    desc: Tắt hạ tầng và xoá volume (chạy lại script init)
+    cmds:
+      - docker compose down -v
+
+  logs:
+    desc: Xem log hạ tầng
+    cmds:
+      - docker compose logs -f
+
+  run:
+    desc: 'Chạy một service. Ví dụ: task run SVC=catalog'
+    requires:
+      vars: [SVC]
+    cmds:
+      - '{{.MVN}} -pl services/{{.SVC}} -am spring-boot:run'
