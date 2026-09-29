@@ -1,0 +1,55 @@
+{
+  "realm": "filmhub",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "roles": {
+    "realm": [
+      { "name": "customer", "description": "Khách mua vé" },
+      { "name": "staff", "description": "Nhân viên soát vé tại rạp" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "filmhub-app",
+      "name": "FilmHub client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:*"],
+      "webOrigins": ["+"]
+    }
+  ],
+  "users": [
+    {
+      "username": "bob",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "bob@filmhub.local",
+      "firstName": "Bob",
+      "lastName": "Hoang",
+      "credentials": [
+        { "type": "password", "value": "bob", "temporary": false }
+      ],
+      "realmRoles": ["customer"]
+    },
+    {
+      "username": "gate01",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "gate01@filmhub.local",
+      "firstName": "Gate",
+      "lastName": "Scanner",
+      "credentials": [
+        { "type": "password", "value": "gate01", "temporary": false }
+      ],
+      "realmRoles": ["staff"]
+    }
+  ]
+}
