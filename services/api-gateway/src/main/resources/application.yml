@@ -1,0 +1,12 @@
+spring:
+    application:
+        name: api-gateway
+    threads:
+        virtual:
+            enabled: true
+
+server:
+  port: 8000
+
+gateway:
+    catalog-url: ${CATALOG_URL:http://localhost:8080}

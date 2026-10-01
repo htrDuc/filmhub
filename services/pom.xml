@@ -19,6 +19,7 @@
 
 	<modules>
 		<module>catalog</module>
+		<module>api-gateway</module>
 	</modules>
 
 	<dependencyManagement>
